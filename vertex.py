@@ -1,13 +1,20 @@
 class Vertex:
-    def __init__(self, point):
-        self.x = point.x
-        self.y = point.y
-        self.edges = []
-        self.visited = False
-    
-    def move_vertex(self, new_point):
-        self.point = new_point
+  def __init__(self, literal):
+    self.id = literal
+    self.edges = []
+    self.visited = False
 
-    def get_id(self):
-        string = str(self.x) + ' ' + str(self.y)
-        return string
+  def change_id(self, new_literal):
+    self.id = new_literal
+
+  def get_id(self):
+    return self.id
+
+  def add_edge(self, edge):
+    self.edges.append(edge)
+
+  def visit(self):
+    self.visited = True
+  
+  def unvisit(self):
+    self.visited = False

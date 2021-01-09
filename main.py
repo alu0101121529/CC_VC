@@ -1,25 +1,15 @@
-from point import *
+from ThreeSAT import *
+from clause import *
 from edge import *
 from graph import *
 from vertex import *
 from vertex_cover import *
+from fileManager import *
 
-point1 = Point(3, 4)
-point2 = Point(5, 10)
-
-vertex1 = Vertex(point1)
-vertex2 = Vertex(point2)
-
-graph1 = Graph()
-
-graph1.insert_vertex(vertex1)
-graph1.insert_vertex(vertex2)
-
-edge1 = Edge(vertex1, vertex2)
-
-graph1.insert_edge(edge1)
-
-# print(graph1.vertices['3 4'].edges[0].start_vertex.x)
-
-VC = Vertex_cover(graph1)
-VC.solve()
+three_sat = ThreeSAT()
+vtx_cover = VertexCover(three_sat)
+file_loader = FileManager(three_sat, "file.sat3")
+file_loader.loadFile()
+print(three_sat.to_string())
+vtx_cover.build_vc()
+vtx_cover.print_vc()
