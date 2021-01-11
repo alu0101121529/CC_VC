@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>graph_transformation &#8212; documentación de Vertex Covex - 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de Vertex Covex - 1.0.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">graph_transformation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fuente para graph_transformation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">vertex_cover</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">edge</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">graph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">vertex</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: graph_transformation</span>
+<span class="sd">   :platform: Unix, Windows</span>
+<span class="sd">   :synopsis: Clase para transformar nuestro grafo en uno compatible de la librería networkx</span>
+<span class="sd">              y mostrar por pantalla un gráfico creado usando matplotlib</span>
+
+<span class="sd">.. moduleauthor:: Guillermo Hernández González &lt;alu0101121529@ull.edu.es&gt;</span>
+<span class="sd">.. moduleauthor:: Manuel Andrés Carrera Galafate &lt;alu0101132020@ull.edu.es&gt;</span>
+<span class="sd">.. moduleauthor:: Victoria Manrique Rolo &lt;alu0101122083@ull.edu.es&gt;</span>
+<span class="sd">.. moduleauthor:: Carlos Díaz Calzadilla &lt;alu0101102726@ull.edu.es&gt;</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="graph_transformation"><a class="viewcode-back" href="../index.html#graph_transformation.graph_transformation">[documentos]</a><span class="k">class</span> <span class="nc">graph_transformation</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. class:: graph_transformation</span>
+<span class="sd">     </span>
+<span class="sd">      Clase que dado un grafo del modulo :func:`graph` es capaz de transformarlo</span>
+<span class="sd">      en uno de la librería :func:`networkx`</span>
+<span class="sd">      </span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__original_graph</span> <span class="o">=</span> <span class="n">graph</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__networkx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+  
+<div class="viewcode-block" id="graph_transformation.build_nodes"><a class="viewcode-back" href="../index.html#graph_transformation.graph_transformation.build_nodes">[documentos]</a>  <span class="k">def</span> <span class="nf">build_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: build_nodes()</span>
+<span class="sd">      :noindex:</span>
+
+<span class="sd">      Pasa los nodos del grafo original a un grafo de networkx</span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__networkx_graph</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__original_graph</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="graph_transformation.build_edges"><a class="viewcode-back" href="../index.html#graph_transformation.graph_transformation.build_edges">[documentos]</a>  <span class="k">def</span> <span class="nf">build_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: build_edges()</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">      Pasa las aristas del grafo original a un grafo de networkx</span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">networkx_edges</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">original_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__original_graph</span><span class="o">.</span><span class="n">get_edges</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">original_edges</span><span class="p">:</span>
+      <span class="n">dummy_edge</span><span class="o">=</span> <span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">start_vertex</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">edge</span><span class="o">.</span><span class="n">end_vertex</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+      <span class="n">networkx_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dummy_edge</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__networkx_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">networkx_edges</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="graph_transformation.print_graph"><a class="viewcode-back" href="../index.html#graph_transformation.graph_transformation.print_graph">[documentos]</a>  <span class="k">def</span> <span class="nf">print_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: print_graph()</span>
+<span class="sd">      :noindex:</span>
+
+<span class="sd">      Crea el grafo de networkx y lo dibuja haciendo una gráfica con matplotlib</span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">build_nodes</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">build_edges</span><span class="p">()</span>
+    <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__networkx_graph</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__networkx_graph</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span> <span class="n">font_size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de Vertex Covex - 1.0.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">graph_transformation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Derechos de autor 2021, Manuel Andrés Carrera Galafate, Victoria Manrique Rolo, Carlos Díaz Calzadilla, Guillermo Hernández González.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
