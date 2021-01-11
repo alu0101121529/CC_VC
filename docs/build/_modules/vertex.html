@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vertex &#8212; documentación de Vertex Covex - 1.0.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de Vertex Covex - 1.0.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">vertex</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fuente para vertex</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: vertex</span>
+<span class="sd">   :platform: Unix, Windows</span>
+<span class="sd">   :synopsis: Clase para representar un vértice en el grafo</span>
+<span class="sd">   :noindex:</span>
+
+<span class="sd">.. moduleauthor:: Guillermo Hernández González &lt;alu0101121529@ull.edu.es&gt;</span>
+<span class="sd">.. moduleauthor:: Manuel Andrés Carrera Galafate &lt;alu0101132020@ull.edu.es&gt;</span>
+<span class="sd">.. moduleauthor:: Victoria Manrique Rolo &lt;alu0101122083@ull.edu.es&gt;</span>
+<span class="sd">.. moduleauthor:: Carlos Díaz Calzadilla &lt;alu0101102726@ull.edu.es&gt;</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Vertex"><a class="viewcode-back" href="../index.html#vertex.Vertex">[documentos]</a><span class="k">class</span> <span class="nc">Vertex</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  .. class:: Vertex</span>
+<span class="sd">  </span>
+<span class="sd">    Clase vértice.</span>
+<span class="sd">    </span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">literal</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: constructor(literal)</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">    :param Literal literal: Clausura que queremos meter en el vértice</span>
+<span class="sd">    </span>
+<span class="sd">      Constructor a partir de un literal.</span>
+<span class="sd">      Un vértice vendrá definido por el id del</span>
+<span class="sd">      vértice, su conjunto de aristas, y por si</span>
+<span class="sd">      está definido o no (necesario para resolver</span>
+<span class="sd">      el problema del vertex cover)</span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">literal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">visited</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="Vertex.change_id"><a class="viewcode-back" href="../index.html#vertex.Vertex.change_id">[documentos]</a>  <span class="k">def</span> <span class="nf">change_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_literal</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: change_id(new_literal)</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">    :param String new_literal: nuevo literal que queremos en el vértice</span>
+
+<span class="sd">      Función que nos permite cambiar el id del</span>
+<span class="sd">      nodo.</span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">new_literal</span></div>
+
+<div class="viewcode-block" id="Vertex.get_id"><a class="viewcode-back" href="../index.html#vertex.Vertex.get_id">[documentos]</a>  <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: get_id()</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">      Funcion que retorna el id del nodo.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
+
+<div class="viewcode-block" id="Vertex.add_edge"><a class="viewcode-back" href="../index.html#vertex.Vertex.add_edge">[documentos]</a>  <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: add_edge(edge)</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">    :param Edge edge: Arista a añadir</span>
+<span class="sd">    </span>
+<span class="sd">      Funcion que añade una arista al conjunto de</span>
+<span class="sd">      aristas del nodo.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Vertex.visit"><a class="viewcode-back" href="../index.html#vertex.Vertex.visit">[documentos]</a>  <span class="k">def</span> <span class="nf">visit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: visit()</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">      Funcion que cambia el estado del nodo a visitado</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">visited</span> <span class="o">=</span> <span class="kc">True</span></div>
+  
+<div class="viewcode-block" id="Vertex.unvisit"><a class="viewcode-back" href="../index.html#vertex.Vertex.unvisit">[documentos]</a>  <span class="k">def</span> <span class="nf">unvisit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. method:: unvisit()</span>
+<span class="sd">      :noindex:</span>
+<span class="sd">      </span>
+<span class="sd">      Funcion que cambia el estado del nodo a no visitado</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">visited</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de Vertex Covex - 1.0.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Código de módulo</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">vertex</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Derechos de autor 2021, Manuel Andrés Carrera Galafate, Victoria Manrique Rolo, Carlos Díaz Calzadilla, Guillermo Hernández González.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
